@@ -57,7 +57,7 @@
                   <img src="<?= BASE_URL ?>assets/images/default.png" height="50">
                 <?php endif; ?>
               </td>
-              <td><a href="<?= BASE_URL ?>produto/abrir/<?= $anuncio['id'] ?>"><?= $anuncio['titulo'] ?></a><br>
+              <td><a href="<?= BASE_URL ?>produto/<?= $anuncio['id'] ?>"><?= $anuncio['titulo'] ?></a><br>
                 <?= utf8_encode($anuncio['categoria']) ?>
               </td>
               <td>R$ <?= number_format($anuncio['valor'], 2, ',', '') ?></td>
