@@ -5,7 +5,7 @@ class Controller
   protected function isUserLogged()
   {
     if (empty($_SESSION['cLogin'])) {
-      header('Loaction: ' . BASE_URL . 'login');
+      header('Location: ' . BASE_URL . 'login');
       exit;
     }
   }
