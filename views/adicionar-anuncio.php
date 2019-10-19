@@ -7,7 +7,7 @@
     </div>
   <?php endif; ?>
 
-  <form method="post" action="<?= BASE_URL ?>anuncios/incluir" enctype="multipart/form-data">
+  <form method="post" action="<?= BASE_URL ?>anuncios/salvar_adicao" enctype="multipart/form-data">
     <div class="form-group">
       <label for="categoria">Categoria:</label>
       <select name="categoria" id="categoria" class="form-control">

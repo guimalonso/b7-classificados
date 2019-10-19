@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Adicionar Anúncio</h1>
 
-  <form method="post" id="form_editar" action="<?= BASE_URL ?>anuncios/atualizar/<?= $id ?>" enctype="multipart/form-data">
+  <form method="post" id="form_editar" action="<?= BASE_URL ?>anuncios/salvar_edicao/<?= $id ?>" enctype="multipart/form-data">
     <div class="form-group">
       <label for="categoria">Categoria:</label>
       <select name="categoria" id="categoria" class="form-control">

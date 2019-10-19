@@ -7,7 +7,14 @@ class AnunciosController extends Controller
     $this->isUserLogged();
 
     $a = new Anuncios();
-    $this->mostrarAnunciosUsuario($a);
+
+    $dados = array();
+
+    $anuncios = $a->getMeusAnuncios();
+
+    $dados['anuncios'] = $anuncios;
+
+    $this->loadTemplate('anuncios', $dados);
   }
 
   public function adicionar()
@@ -24,7 +31,7 @@ class AnunciosController extends Controller
     $this->loadTemplate('adicionar-anuncio', $dados);
   }
 
-  public function incluir()
+  public function salvar_adicao()
   {
     $dados = array();
     $sucesso = false;
@@ -64,7 +71,7 @@ class AnunciosController extends Controller
     $this->loadTemplate('editar-anuncio', $dados);
   }
 
-  public function atualizar($id)
+  public function salvar_edicao($id)
   {
     $a = new Anuncios();
     if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
@@ -78,7 +85,8 @@ class AnunciosController extends Controller
       $a->editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id);
     }
 
-    $this->mostrarAnunciosUsuario($a);
+    header('Location: ' . BASE_URL . 'anuncios');
+    exit();
   }
 
   public function excluir()
@@ -93,7 +101,8 @@ class AnunciosController extends Controller
       $a->excluirAnuncio($id);
     }
 
-    $this->mostrarAnunciosUsuario($a);
+    header('Location: ' . BASE_URL . 'anuncios');
+    exit();
   }
 
   public function excluir_foto()
@@ -108,21 +117,12 @@ class AnunciosController extends Controller
       $id_anuncio = $a->excluirFoto($id);
     }
 
+    $url_redir = BASE_URL . 'anuncios';
     if (isset($id_anuncio)) {
-      $this->editar($id_anuncio);
-    } else {
-      $this->mostrarAnunciosUsuario($a);
+      $url_redir .= '/editar/' . $id_anuncio;
     }
-  }
 
-  private function mostrarAnunciosUsuario($objAnuncios)
-  {
-    $dados = array();
-
-    $anuncios = $objAnuncios->getMeusAnuncios();
-
-    $dados['anuncios'] = $anuncios;
-
-    $this->loadTemplate('anuncios', $dados);
+    header('Location: ' . $url_redir);
+    exit();
   }
 }
