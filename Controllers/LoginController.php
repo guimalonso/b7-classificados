@@ -1,5 +1,10 @@
 <?php
 
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Usuarios;
+
 class LoginController extends Controller
 {
   public function index()

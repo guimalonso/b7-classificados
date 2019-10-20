@@ -1,5 +1,10 @@
 <?php
 
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Anuncios;
+
 class ProdutoController extends Controller
 {
   public function index()

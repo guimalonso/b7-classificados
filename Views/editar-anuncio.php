@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Adicionar Anúncio</h1>
 
-  <form method="post" id="form_editar" action="<?= BASE_URL ?>anuncios/salvar_edicao/<?= $id ?>" enctype="multipart/form-data">
+  <form method="post" id="form_editar" action="<?= BASE_URL ?>anuncios/salvarEdicao/<?= $id ?>" enctype="multipart/form-data">
     <div class="form-group">
       <label for="categoria">Categoria:</label>
       <select name="categoria" id="categoria" class="form-control">
@@ -21,7 +21,7 @@
 
     <div class="form-group">
       <label for="valor">Valor:</label>
-      <input type="text" name="valor" id="valor" value="<?= $info['valor'] ?>" class="form-control">
+      <input type="number" name="valor" id="valor" value="<?= $info['valor'] ?>" class="form-control">
     </div>
 
     <div class="form-group">
@@ -59,7 +59,7 @@
     <input type="submit" value="Salvar" class="btn btn-default">
   </form>
 
-  <form id="form_excluir_foto" action="<?= BASE_URL ?>anuncios/excluir_foto" method="post">
+  <form id="form_excluir_foto" action="<?= BASE_URL ?>anuncios/excluirFoto" method="post">
     <input type="hidden" name="id_foto" id="id_foto" value="">
   </form>
 </div>

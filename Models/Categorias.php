@@ -1,5 +1,9 @@
 <?php
 
+namespace Models;
+
+use \Core\Model;
+
 class Categorias extends Model
 {
   public function getLista()

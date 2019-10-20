@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Core
 {
   public function run()
@@ -35,15 +37,18 @@ class Core
       $currentAction = 'index';
     }
 
+    $prefix = '\Controllers\\';
+
     if (
-      !file_exists('controllers/' . $currentController . '.php')
-      || !method_exists($currentController, $currentAction)
+      !file_exists('Controllers/' . $currentController . '.php')
+      || !method_exists($prefix . $currentController, $currentAction)
     ) {
       $currentController = 'NotFoundController';
       $currentAction = "index";
     }
 
-    $c = new $currentController();
+    $newController = $prefix . $currentController;
+    $c = new $newController();
     call_user_func_array(array($c, $currentAction), $params);
   }
 

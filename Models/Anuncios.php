@@ -1,5 +1,9 @@
 <?php
 
+namespace Models;
+
+use \Core\Model;
+
 class Anuncios extends Model
 {
   public function getTotalAnuncios($filtros)

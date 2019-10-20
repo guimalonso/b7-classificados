@@ -1,5 +1,12 @@
 <?php
 
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Usuarios;
+use \Models\Categorias;
+use \Models\Anuncios;
+
 class HomeController extends Controller
 {
   public function index()

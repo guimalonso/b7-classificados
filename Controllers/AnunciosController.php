@@ -1,5 +1,11 @@
 <?php
 
+namespace Controllers;
+
+use \Core\Controller;
+use \Models\Anuncios;
+use \Models\Categorias;
+
 class AnunciosController extends Controller
 {
   public function index()
@@ -31,7 +37,7 @@ class AnunciosController extends Controller
     $this->loadTemplate('adicionar-anuncio', $dados);
   }
 
-  public function salvar_adicao()
+  public function salvarAdicao()
   {
     $dados = array();
     $sucesso = false;
@@ -71,7 +77,7 @@ class AnunciosController extends Controller
     $this->loadTemplate('editar-anuncio', $dados);
   }
 
-  public function salvar_edicao($id)
+  public function salvarEdicao($id)
   {
     $a = new Anuncios();
     if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
@@ -105,7 +111,7 @@ class AnunciosController extends Controller
     exit();
   }
 
-  public function excluir_foto()
+  public function excluirFoto()
   {
     $this->isUserLogged();
 

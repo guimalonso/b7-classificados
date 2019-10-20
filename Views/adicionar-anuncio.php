@@ -7,7 +7,7 @@
     </div>
   <?php endif; ?>
 
-  <form method="post" action="<?= BASE_URL ?>anuncios/salvar_adicao" enctype="multipart/form-data">
+  <form method="post" action="<?= BASE_URL ?>anuncios/salvarAdicao" enctype="multipart/form-data">
     <div class="form-group">
       <label for="categoria">Categoria:</label>
       <select name="categoria" id="categoria" class="form-control">
@@ -24,7 +24,7 @@
 
     <div class="form-group">
       <label for="valor">Valor:</label>
-      <input type="text" name="valor" id="valor" class="form-control">
+      <input type="number" name="valor" id="valor" class="form-control">
     </div>
 
     <div class="form-group">
