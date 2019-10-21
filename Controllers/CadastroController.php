@@ -9,6 +9,7 @@ class CadastroController extends Controller
 {
   public function index()
   {
+    $this->generateCsrf();
     $this->loadTemplate('cadastro');
   }
 
@@ -20,7 +21,7 @@ class CadastroController extends Controller
 
     $u = new Usuarios();
 
-    if (isset($_POST['nome']) && !empty($_POST['nome'])) {
+    if ($this->verifyCsrf() && isset($_POST['nome']) && !empty($_POST['nome'])) {
       $nome = addslashes($_POST['nome']);
       $email = addslashes($_POST['email']);
       $senha = $_POST['senha'];
@@ -36,6 +37,7 @@ class CadastroController extends Controller
 
     $dados['valido'] = $valido;
     $dados['sucesso'] = $sucesso;
+    $this->generateCsrf();
     $this->loadTemplate('cadastro', $dados);
   }
 }

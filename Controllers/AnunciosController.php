@@ -26,6 +26,7 @@ class AnunciosController extends Controller
   public function adicionar()
   {
     $this->isUserLogged();
+    $this->generateCsrf();
 
     $dados = array();
 
@@ -43,7 +44,7 @@ class AnunciosController extends Controller
     $sucesso = false;
     $a = new Anuncios();
 
-    if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
+    if ($this->verifyCsrf() && isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       $titulo = addslashes($_POST['titulo']);
       $categoria = addslashes($_POST['categoria']);
       $valor = addslashes($_POST['valor']);
@@ -55,12 +56,14 @@ class AnunciosController extends Controller
     }
 
     $dados['sucesso'] = $sucesso;
+    $this->generateCsrf();
     $this->loadTemplate('adicionar-anuncio', $dados);
   }
 
   public function editar($id)
   {
     $this->isUserLogged();
+    $this->generateCsrf();
 
     $dados = array();
 
@@ -80,7 +83,7 @@ class AnunciosController extends Controller
   public function salvarEdicao($id)
   {
     $a = new Anuncios();
-    if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
+    if ($this->verifyCsrf() && isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       $titulo = addslashes($_POST['titulo']);
       $categoria = addslashes($_POST['categoria']);
       $valor = addslashes($_POST['valor']);

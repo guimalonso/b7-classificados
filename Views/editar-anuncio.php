@@ -56,6 +56,8 @@
         </div>
       </div>
     </div>
+
+    <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
     <input type="submit" value="Salvar" class="btn btn-default">
   </form>
 

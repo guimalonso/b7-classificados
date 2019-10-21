@@ -12,6 +12,21 @@ class Controller
     }
   }
 
+  protected function generateCsrf()
+  {
+    $_SESSION['csrf'] = $_SESSION['csrf'] ?? md5(time() . rand(0, 9999));
+  }
+
+  protected function verifyCsrf()
+  {
+    if ($_POST['csrf'] == $_SESSION['csrf']) {
+      unset($_SESSION['csrf']);
+      return true;
+    }
+
+    return false;
+  }
+
   protected function loadView($viewName, $viewData = array())
   {
     extract($viewData);

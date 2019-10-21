@@ -41,6 +41,7 @@
       <input type="text" name="telefone" id="telefone" class="form-control">
     </div>
 
+    <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
     <input type="submit" value="Cadastrar" class="btn btn-default">
   </form>
 </div>

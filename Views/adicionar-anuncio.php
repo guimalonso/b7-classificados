@@ -40,6 +40,8 @@
         <option value="2">Ótimo</option>
       </select>
     </div>
+
+    <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
     <input type="submit" value="Adicionar" class="btn btn-default">
   </form>
 </div>
