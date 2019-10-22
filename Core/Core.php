@@ -6,6 +6,8 @@ class Core
 {
   public function run()
   {
+    $this->checkSessionOwner();
+
     $url = '/';
     if (isset($_GET['url'])) {
       $url .= $_GET['url'];
@@ -84,5 +86,17 @@ class Core
     }
 
     return $url;
+  }
+
+  private function checkSessionOwner()
+  {
+    $owner_id = md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+    if (!isset($_SESSION['owner'])) {
+      $_SESSION['owner'] = $owner_id;
+    }
+
+    if ($owner_id != $_SESSION['owner']) {
+      die('Acesso não permitido');
+    }
   }
 }
