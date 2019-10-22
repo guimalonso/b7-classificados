@@ -17,4 +17,12 @@ class Categorias extends Model
 
     return $categorias;
   }
+
+  public static function getMaxCategoria()
+  {
+    global $db;
+    $sql = $db->query("SELECT MAX(id) AS max_id FROM categorias");
+    $row = $sql->fetch();
+    return $row['max_id'];
+  }
 }

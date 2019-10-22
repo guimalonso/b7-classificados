@@ -46,7 +46,13 @@ class AnunciosController extends Controller
 
     if ($this->verifyCsrf() && isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       $titulo = addslashes($_POST['titulo']);
-      $categoria = addslashes($_POST['categoria']);
+      $categoria = filter_input(INPUT_POST, 'categoria', FILTER_VALIDATE_INT, array(
+        'options' => array(
+          'min' => 1,
+          'max' => Categorias::getMaxCategoria(),
+          'default' => 1
+        )
+      ));
       $valor = addslashes($_POST['valor']);
       $descricao = addslashes($_POST['descricao']);
       $estado = addslashes($_POST['estado']);
@@ -71,7 +77,7 @@ class AnunciosController extends Controller
     $c = new Categorias();
 
     $cats = $c->getLista();
-    $info = $a->getAnuncio($id);
+    $info = $a->getAnuncioById($id);
 
     $dados['cats'] = $cats;
     $dados['info'] = $info;
@@ -85,7 +91,13 @@ class AnunciosController extends Controller
     $a = new Anuncios();
     if ($this->verifyCsrf() && isset($_POST['titulo']) && !empty($_POST['titulo'])) {
       $titulo = addslashes($_POST['titulo']);
-      $categoria = addslashes($_POST['categoria']);
+      $categoria = filter_input(INPUT_POST, 'categoria', FILTER_VALIDATE_INT, array(
+        'options' => array(
+          'min_range' => 1,
+          'max_range' => Categorias::getMaxCategoria(),
+          'default' => 1
+        )
+      ));
       $valor = addslashes($_POST['valor']);
       $descricao = addslashes($_POST['descricao']);
       $estado = addslashes($_POST['estado']);

@@ -3,6 +3,7 @@
 namespace Models;
 
 use \Core\Model;
+use \Core\Util;
 
 class Anuncios extends Model
 {
@@ -108,7 +109,34 @@ class Anuncios extends Model
     return $array;
   }
 
-  public function getAnuncio($id)
+  public function getAnuncio($slug)
+  {
+    $array = array();
+    $sql = $this->db->prepare("SELECT a.*, c.nome AS categoria, u.telefone FROM anuncios a
+                          JOIN categorias c ON a.id_categoria = c.id
+                          JOIN usuarios u ON a.id_usuario = u.id
+                          WHERE a.slug = :slug");
+    $sql->bindValue(":slug", $slug);
+    $sql->execute();
+
+    if ($sql->rowCount() == 1) {
+      $array = $sql->fetch();
+      $array['fotos'] = array();
+
+      $sql = $this->db->prepare("SELECT id, url FROM anuncios_imagens WHERE
+        id_anuncio = :id_anuncio");
+      $sql->bindValue(":id_anuncio", $array['id']);
+      $sql->execute();
+
+      if ($sql->rowCount() > 0) {
+        $array['fotos'] = $sql->fetchAll();
+      }
+    }
+
+    return $array;
+  }
+
+  public function getAnuncioById($id)
   {
     $array = array();
     $sql = $this->db->prepare("SELECT a.*, c.nome AS categoria, u.telefone FROM anuncios a
@@ -139,13 +167,14 @@ class Anuncios extends Model
   {
     $sql = $this->db->prepare("INSERT INTO anuncios SET titulo = :titulo,
       id_categoria = :id_categoria, id_usuario = :id_usuario, descricao = :descricao,
-      valor = :valor, estado = :estado");
+      valor = :valor, estado = :estado, slug = :slug");
     $sql->bindvalue(":titulo", $titulo);
     $sql->bindValue(":id_categoria", $categoria);
     $sql->bindValue(":id_usuario", $_SESSION['cLogin']['id']);
     $sql->bindValue(":descricao", $descricao);
     $sql->bindValue(":valor", $valor);
     $sql->bindValue(":estado", $estado);
+    $sql->bindValue(":slug", Util::generateSlug($titulo));
     $sql->execute();
   }
 
@@ -153,13 +182,14 @@ class Anuncios extends Model
   {
     $sql = $this->db->prepare("UPDATE anuncios SET titulo = :titulo,
       id_categoria = :id_categoria, descricao = :descricao,
-      valor = :valor, estado = :estado WHERE id = :id");
+      valor = :valor, estado = :estado, slug = :slug WHERE id = :id");
     $sql->bindvalue(":titulo", $titulo);
     $sql->bindValue(":id_categoria", $categoria);
     $sql->bindValue(":descricao", $descricao);
     $sql->bindValue(":valor", $valor);
     $sql->bindValue(":estado", $estado);
     $sql->bindValue(":id", $id);
+    $sql->bindValue(":slug", Util::generateSlug($titulo));
     $sql->execute();
 
     if (count($fotos) > 0) {

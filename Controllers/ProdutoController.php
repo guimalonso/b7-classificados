@@ -10,9 +10,9 @@ class ProdutoController extends Controller
   public function index()
   { }
 
-  public function abrir($id)
+  public function abrir($slug)
   {
-    if (empty($id)) {
+    if (empty($slug)) {
       header("Location: " . BASE_URL);
       exit;
     }
@@ -21,7 +21,7 @@ class ProdutoController extends Controller
 
     $a = new Anuncios();
 
-    $info = $a->getAnuncio($id);
+    $info = $a->getAnuncio($slug);
     $dados['info'] = $info;
 
     $this->loadTemplate('produto', $dados);
