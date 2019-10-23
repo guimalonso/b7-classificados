@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /assets
+Disallow: /Controllers
+Disallow: /Core
+Disallow: /Models
+Disallow: /Views
+Disallow: .gitignore
+Disallow: .htaccess
+Disallow: composer.json
+Disallow: config.php
+Disallow: environment.php
+Disallow: routers.php
+Disallow: robots.txt
+Allow: index.php
